@@ -1,0 +1,131 @@
+## Table `teams`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `int8` | Primary Identity |
+| `league` | `text` |  |
+| `name` | `text` |  |
+| `city` | `text` |  Nullable |
+| `abbreviation` | `text` |  Nullable |
+| `logo_url` | `text` |  Nullable |
+| `created_at` | `timestamptz` |  Nullable |
+
+## Table `players`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `int8` | Primary Identity |
+| `league` | `text` |  |
+| `team_id` | `int8` |  Nullable |
+| `first_name` | `text` |  |
+| `last_name` | `text` |  |
+| `full_name` | `text` |  |
+| `position` | `text` |  Nullable |
+| `nationality` | `text` |  Nullable |
+| `height_cm` | `int4` |  Nullable |
+| `weight_kg` | `int4` |  Nullable |
+| `active` | `bool` |  Nullable |
+| `headshot_url` | `text` |  Nullable |
+| `created_at` | `timestamptz` |  Nullable |
+| `birth_date` | `date` |  Nullable |
+
+## Table `nba_player_game_stats`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `int8` | Primary |
+| `player_id` | `int8` |  Nullable |
+| `team_id` | `int8` |  Nullable |
+| `game_id` | `varchar` |  |
+| `game_date` | `date` |  |
+| `season` | `varchar` |  |
+| `minutes` | `numeric` |  Nullable |
+| `points` | `int4` |  Nullable |
+| `rebounds` | `int4` |  Nullable |
+| `assists` | `int4` |  Nullable |
+| `steals` | `int4` |  Nullable |
+| `blocks` | `int4` |  Nullable |
+| `turnovers` | `int4` |  Nullable |
+| `field_goals_made` | `int4` |  Nullable |
+| `field_goals_attempted` | `int4` |  Nullable |
+| `three_pointers_made` | `int4` |  Nullable |
+| `three_pointers_attempted` | `int4` |  Nullable |
+| `free_throws_made` | `int4` |  Nullable |
+| `free_throws_attempted` | `int4` |  Nullable |
+| `created_at` | `timestamp` |  Nullable |
+
+## Table `nhl_player_game_stats`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `int8` | Primary |
+| `player_id` | `int8` |  Nullable |
+| `team_id` | `int8` |  Nullable |
+| `game_id` | `varchar` |  |
+| `game_date` | `date` |  |
+| `season` | `varchar` |  |
+| `position` | `varchar` |  Nullable |
+| `goals` | `int4` |  Nullable |
+| `assists` | `int4` |  Nullable |
+| `points` | `int4` |  Nullable |
+| `shots` | `int4` |  Nullable |
+| `power_play_goals` | `int4` |  Nullable |
+| `power_play_assists` | `int4` |  Nullable |
+| `hits` | `int4` |  Nullable |
+| `blocked_shots` | `int4` |  Nullable |
+| `plus_minus` | `int4` |  Nullable |
+| `penalty_minutes` | `int4` |  Nullable |
+| `time_on_ice` | `int4` |  Nullable |
+| `created_at` | `timestamp` |  Nullable |
+
+## Table `epl_player_game_stats`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `int8` | Primary |
+| `player_id` | `int8` |  Nullable |
+| `team_id` | `int8` |  Nullable |
+| `game_id` | `varchar` |  |
+| `game_date` | `date` |  |
+| `season` | `varchar` |  |
+| `minutes_played` | `int4` |  Nullable |
+| `goals` | `int4` |  Nullable |
+| `assists` | `int4` |  Nullable |
+| `shots` | `int4` |  Nullable |
+| `shots_on_target` | `int4` |  Nullable |
+| `key_passes` | `int4` |  Nullable |
+| `passes_completed` | `int4` |  Nullable |
+| `tackles` | `int4` |  Nullable |
+| `interceptions` | `int4` |  Nullable |
+| `yellow_cards` | `int4` |  Nullable |
+| `red_cards` | `int4` |  Nullable |
+| `rating` | `numeric` |  Nullable |
+| `created_at` | `timestamp` |  Nullable |
+
+## Table `team_game_stats`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `int8` | Primary |
+| `team_id` | `int8` |  Nullable |
+| `game_id` | `varchar` |  |
+| `game_date` | `date` |  |
+| `season` | `varchar` |  Nullable |
+| `opponent_team_id` | `int8` |  Nullable |
+| `won` | `bool` |  Nullable |
+| `goals_scored` | `int4` |  Nullable |
+| `goals_allowed` | `int4` |  Nullable |
+| `created_at` | `timestamp` |  Nullable |
+
