@@ -16,9 +16,9 @@ SEASONS = ["20242025", "20252026"]
 
 def get_boxscore(game_id):
     for game in game_id:
-        url = f'https://api-web.nhle.com/v1/gamecenter/game_id/boxscore'
+        url = f'https://api-web.nhle.com/v1/gamecenter/{game}/boxscore'
 
-        response = request.get(url)
+        response = requests.get(url)
 
         if response.status_code != 200:
             print(f"Failed for {game}| {response.status_code} | {response.text}")
@@ -28,6 +28,8 @@ def get_boxscore(game_id):
         # id, player_id (from players table), team_id (from teams table), gameId, game_date, season, position, goals, assists, points, 
         # shots, pp goals, pp assists, hits, blocked shots, +-, pen mins, TOI.      
         #we can find all this data by looking in the playerByGameStats section of the box score URL.
+
+        
 
 def main() -> None:
     game_ids: set[int] = set()

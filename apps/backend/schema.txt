@@ -31,6 +31,7 @@
 | `active` | `bool` |  Nullable |
 | `headshot_url` | `text` |  Nullable |
 | `created_at` | `timestamptz` |  Nullable |
+| `nhl_player_id` | `int8` |  Nullable |
 | `birth_date` | `date` |  Nullable |
 
 ## Table `nba_player_game_stats`

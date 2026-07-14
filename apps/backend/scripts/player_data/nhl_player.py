@@ -37,6 +37,7 @@ for team in team_abbreviations:
         players.append({
             "league": "NHL",
             "team_id": team_id,
+            "nhl_player_id": player["id"],
             "first_name": player["firstName"]["default"],
             "last_name": player["lastName"]["default"],
             "full_name": player["firstName"]["default"] + " " + player["lastName"]["default"],
@@ -51,6 +52,7 @@ for team in team_abbreviations:
             players.append({
             "league": "NHL",
             "team_id": team_id,
+            "nhl_player_id": player["id"],
             "first_name": player["firstName"]["default"],
             "last_name": player["lastName"]["default"],
             "full_name": player["firstName"]["default"] + " " + player["lastName"]["default"],
@@ -65,6 +67,7 @@ for team in team_abbreviations:
             players.append({
             "league": "NHL",
             "team_id": team_id,
+            "nhl_player_id": player["id"],
             "first_name": player["firstName"]["default"],
             "last_name": player["lastName"]["default"],
             "full_name": player["firstName"]["default"] + " " + player["lastName"]["default"],
@@ -77,9 +80,32 @@ for team in team_abbreviations:
 
     time.sleep(0.2)
 
-response = supabase.table("players").upsert(players).execute()
+nhl_ids = [p["nhl_player_id"] for p in players]
 
-if response.data:
-    print("Inserted:", len(response.data))
-else:
-    print("Insert failed:", response)
+existing = supabase.table("players") \
+    .select("id,nhl_player_id") \
+    .in_("nhl_player_id", nhl_ids) \
+    .execute()
+
+id_map = {row["nhl_player_id"]: row["id"] for row in (existing.data or [])}
+
+to_update = []
+to_insert = []
+
+for p in players:
+    if p["nhl_player_id"] in id_map:
+        p["id"] = id_map[p["nhl_player_id"]]
+        to_update.append(p)
+    else:
+        to_insert.append(p)
+
+if to_update:
+    for p in to_update:
+        supabase.table("players").update({k: v for k, v in p.items() if k != "id"}).eq("id", p["id"]).execute()
+
+if to_insert:
+    response = supabase.table("players").insert(to_insert).execute()
+    print("Inserted:", len(response.data or []))
+
+if to_update:
+    print("Updated:", len(to_update))
